@@ -1,0 +1,210 @@
+#Task-1
+def minIndex(a,start,end):
+    if start==end:
+        return start
+    index=minIndex(a, start+1, end)
+    if a[index]<a[start]:
+        return index
+    else:
+        
+        return start
+
+def selection(A,start,end):
+    
+    if start==end:
+        return A
+    min_index=minIndex(A,start,end)
+    if (min_index!=start):
+        temp=A[min_index]
+        A[min_index]=A[start]
+        A[start]=temp
+    selection(A, start+1,end)
+        
+#Tester
+a=[1,5,4,3,2,9]
+selection(a,0,len(a)-1)
+print(a)
+
+#Task-2
+
+#Tester
+
+#Task-3
+class Node:
+    def __init__(self,value,next):
+        self.value=value
+        self.next=next
+class singleLinkedList:
+    def __init__(self,a):
+        self.head=None
+        tail=self.head
+        for i in a:
+            n=Node(i, None)
+            if self.head is None:
+                self.head=n
+                tail=self.head
+            else:
+                tail.next=n
+                tail=n
+    def showList(self):
+        if self.head==None:
+            print("Empty List.")
+        else:
+            
+            p=self.head
+            while p is not None:
+                print(p.value, end=" ")
+                p=p.next
+            print()
+    def bubble_sort(self):
+        end=None
+        while end!=self.head.next:
+            current=self.head
+            while current.next!= end:
+                next_node=current.next
+                if current.value>next_node.value:
+                    current.value,next_node.value=next_node.value,current.value
+                current=current.next
+            end=current
+#Tester
+b=[9,3,5,2]
+myList=singleLinkedList(b)
+myList.bubble_sort()
+myList.showList()
+
+#Task-4
+lass Node:
+    def __init__(self,value,next):
+        self.value=value
+        self.next=next
+class singleLinkedList:
+    def __init__(self,a):
+        self.head=None
+        tail=self.head
+        for i in a:
+            n=Node(i, None)
+            if self.head is None:
+                self.head=n
+                tail=self.head
+            else:
+                tail.next=n
+                tail=n
+    def printList(self):
+        if self.head==None:
+            print("Empty List.")
+        else:
+            p=self.head
+            while p is not None:
+                print(p.value, end=" ")
+                p=p.next
+            print()
+    def selection_sort(self):
+        firstnode=self.head
+        while firstnode is not None:
+            
+            minimum=firstnode
+            next_node=firstnode.next
+            
+            while next_node is not None:
+                if (minimum.value>next_node.value):
+                    minimum=next_node
+                next_node=next_node.next
+                
+            temp=firstnode.value
+            firstnode.value=minimum.value
+            minimum.value=temp
+            firstnode=firstnode.next
+#Tester
+b=[9,3,5,2]
+myList=singleLinkedList(b)           
+myList.selection_sort()
+myList.printList()
+
+#Task-5
+class Node:
+    def __init__(self,value,next,prev):
+        self.value=value
+        self.next=next
+        self.prev=prev
+class DoublyLinkedList:
+    def __init__(self,a):
+        self.head=None
+        tail=self.head
+        for i in a:
+            n=Node(i,None,None)
+            if self.head is None:
+                n.prev=self.head
+                self.head=n
+                tail=n
+            else:
+                tail.next=n
+                n.prev=tail
+                tail=n
+    def printList(self):
+        if self.head==None:
+            print("Empty List.")
+        else:
+            p=self.head
+            while p is not None:
+                print(p.value, end=" ")
+                p=p.next
+            print()
+    def insertion_sort(self):
+        next_node=self.head.next
+        while next_node is not None:
+            firstnode=self.head
+            while firstnode is not None:
+                if (firstnode.value>next_node.value):
+                    temp=firstnode.value
+                    firstnode.value=next_node.value
+                    next_node.value=temp
+                
+                
+                else:
+                    break
+                firstnode=firstnode.next
+            next_node=next_node.next 
+    
+#Tester
+b=[9,3,5,2]
+myList=DoublyLinkedList(b)
+myList.insertion_sort()
+myList.printList()
+
+#Task-6
+def binary_search(A, value,left,right):
+    if left<=right:
+        M=(left+right)//2
+        if(value==A[M]):
+            return M
+        elif (value>A[M]):
+            return binary_search(A, value, M+1, right)
+        elif (value<A[M]):
+            return binary_search(A,value,left,M-1)
+    else:
+        return -1
+a=[5,6,12,19,20,30]
+answer=(binary_search(a, 0, 0, len(a)-1))
+if (answer==-1):
+    print("The given value does not exist in the list")
+    
+else:
+    print("the index number of the element is :", answer)
+
+
+#Task-7
+def fibonacci(n):
+    if n==1:
+        return 0
+    elif n in [2,3]:
+        return 1
+    elif fibonacci_series[n] != -1: 
+        return fibonacci_series[n]
+    else:
+        fibonacci_series_element=fibonacci(n-1)+fibonacci(n-2)
+        fibonacci_series[n]=fibonacci_series_element
+        return fibonacci_series[n]
+#Tester
+n1=int(input("Enter the nth number: "))
+fibonacci_series=[-1]*(n1+1)
+print(fibonacci(n1))

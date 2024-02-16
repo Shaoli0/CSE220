@@ -1,0 +1,132 @@
+#Task-1
+class KeyIndex:
+    def __init__(self,a):
+        c=0
+        for b in range(len(a)):
+            if a[b]<0:
+                c+=1
+                break
+        if c!=0:
+            minimum=a[0]
+            for l in a:
+                if l<minimum:
+                    minimum=l
+            self.x=minimum*(-1)
+            for i in range(len(a)):
+                temp=a[i]
+                a[i]=temp+self.x
+        else:
+            self.x=0
+        m=a[0]
+        for y in range(len(a)):
+            if a[y]>m:
+                m=a[y]
+        
+        self.k=[0]*(m+1)
+        
+        for j in range(len(a)):
+            index=a[j]
+            self.k[index]=self.k[index]+1
+            
+    def search_method(self,element):
+        value=element+self.x
+        if value<0 or value>=len(self.k) or self.k[value]==0:
+            return False
+        else:
+            return True
+    def sort_method(self):
+        for i in range(len(self.k)):
+                if self.k[i]!=0:
+                    increment=0
+                    while increment<self.k[i]:
+                        real_value=i-(self.x)
+                        print(real_value,end=" ")
+                        increment+=1
+        print('')
+#Tester
+A=[4,2,3,4,7,4]
+obj=KeyIndex(A)
+print(obj.search_method(3))
+obj.sort_method()
+
+print("-------------")
+
+A=[4,2,3,4,7,4]
+obj=KeyIndex(A)
+print(obj.search_method(0))
+obj.sort_method()
+
+print("-------------")
+A=[4,2,3,4,7,4]
+obj=KeyIndex(A)
+print(obj.search_method(-9))
+obj.sort_method()
+
+print("-------------")
+
+A=[4,2,3,4,7,4]
+obj=KeyIndex(A)
+print(obj.search_method(14))
+obj.sort_method()
+
+print("-------------")
+
+A=[4,-2,3,-4,7,4]
+obj=KeyIndex(A)
+print(obj.search_method(-4))
+obj.sort_method()                    
+
+print("-------------")
+
+A=[4,-2,3,-4,7,4]
+obj=KeyIndex(A)
+print(obj.search_method(0))
+obj.sort_method()
+
+print("-------------")
+
+A=[4,-2,3,-4,7,4]
+obj=KeyIndex(A)
+print(obj.search_method(-1))
+obj.sort_method()
+
+#Task-2
+def hashTable(a):
+    length=9
+    hash_table=[-1]*(length)
+    vowels = "AEIOU"
+    numbers = "0123456789"
+    if len(a)<=length:
+        for i in a:
+            temp=i
+            s=0
+            c=0
+            for j in range(len(temp)):
+                if temp[j] in numbers:
+                    s=s+int(temp[j])
+                elif temp[j] not in vowels:
+                    c+=1
+            index=((c*24)+s)%length
+            if hash_table[index]==-1:
+                hash_table[index]=temp
+            else:
+                while hash_table[index]!=-1:
+                    index=index+1
+                    index%=length
+                hash_table[index]=temp
+        for k in range(len(hash_table)):
+            if hash_table[k] != -1:
+                print(f"{hash_table[k]} is in {k}th index")
+    else:
+        print("The given list exceeds the input limit")
+
+#Tester
+A=["ST1E89B8A32","AB3J88IB45","IK4L32FA71"]
+hashTable(A)
+print("----------")
+A=["ST1E89B8A32","AB3J88IB45","IK4L32FA71","ST1E88B8A33"]
+hashTable(A)
+print("----------")
+A=["ST1E89B8A32","AB3J88IB45","IK4L32FA71","ST1E88B8A33","ST1E89B8A32","AB3J88IB45","IK4L32FA71","ST1E88B8A33"]
+hashTable(A)
+print("--------END--------")
